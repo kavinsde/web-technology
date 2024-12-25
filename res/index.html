@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10th Result Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+      input[type="text"],
+      input[type="number"] {
+        padding: 5px;
+        width: 150px;
+      }
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .pass {
+        color: green;
+      }
+      .fail {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="resultForm">
+      <h1>10th Result Calculator</h1>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="roll">Roll Number:</label>
+        <input type="text" name="roll" id="roll" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="mark1">Tamil:</label>
+        <input
+          type="number"
+          name="mark1"
+          id="mark1"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="mark2">English:</label>
+        <input
+          type="number"
+          name="mark2"
+          id="mark2"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="mark3">Maths:</label>
+        <input
+          type="number"
+          name="mark3"
+          id="mark3"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="mark4">Science:</label>
+        <input
+          type="number"
+          name="mark4"
+          id="mark4"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="mark5">Social:</label>
+        <input
+          type="number"
+          name="mark5"
+          id="mark5"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+      <input type="submit" value="Calculate Result" />
+    </form>
+
+    <div id="result-table"></div>
+
+    <script>
+      document
+        .getElementById("resultForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const roll = document.getElementById("roll").value;
+          const marks = [
+            parseInt(document.getElementById("mark1").value),
+            parseInt(document.getElementById("mark2").value),
+            parseInt(document.getElementById("mark3").value),
+            parseInt(document.getElementById("mark4").value),
+            parseInt(document.getElementById("mark5").value),
+          ];
+
+          const grades = [];
+          const results = [];
+
+          marks.forEach((mark, index) => {
+            let grade;
+            let result = true;
+
+            if (mark < 35) {
+              result = false;
+              grade = "F";
+            } else if (mark < 45) {
+              grade = "E";
+            } else if (mark < 55) {
+              grade = "D";
+            } else if (mark < 65) {
+              grade = "C";
+            } else if (mark < 75) {
+              grade = "B";
+            } else if (mark < 85) {
+              grade = "A";
+            } else {
+              grade = "O";
+            }
+
+            grades.push(grade);
+            results.push(result);
+          });
+
+          const total = marks.reduce((sum, mark) => sum + mark, 0);
+          const percentage = ((total / 500) * 100).toFixed(2);
+
+          const subjects = [
+            "Tamil",
+            "English",
+            "Maths",
+            "Science",
+            "Social Science",
+          ];
+
+          let tableHTML = `
+                <table>
+                    <tr>
+                        <th colspan="2">Name: ${name}</th>
+                        <th colspan="2">Roll Number: ${roll}</th>
+                    </tr>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Mark</th>
+                        <th>Grade</th>
+                        <th>Result</th>
+                    </tr>`;
+
+          subjects.forEach((subject, index) => {
+            tableHTML += `
+                    <tr>
+                        <td>${subject}</td>
+                        <td>${marks[index]}</td>
+                        <td>${grades[index]}</td>
+                        <td class="${results[index] ? "pass" : "fail"}">
+                            ${results[index] ? "PASS" : "FAIL"}
+                        </td>
+                    </tr>`;
+          });
+
+          const overallResult = results.every((result) => result);
+
+          tableHTML += `
+                    <tr>
+                        <td colspan="4">
+                            <strong>Total Marks:</strong> ${total}/500<br>
+                            <strong>Percentage:</strong> ${percentage}%<br>
+                            <strong>Overall Result:</strong> 
+                            <span class="${overallResult ? "pass" : "fail"}">
+                                ${overallResult ? "PASS" : "FAIL"}
+                            </span>
+                        </td>
+                    </tr>
+                </table>`;
+
+          document.getElementById("result-table").innerHTML = tableHTML;
+        });
+    </script>
+  </body>
+</html>
