@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Salary Calculator</title>
+    <script>
+      function calculateSalary() {
+        const basic = parseFloat(document.getElementById("basic").value) || 0;
+        const hra = basic * 0.2; // Example: HRA is 20% of basic salary
+        const da = basic * 0.1; // Example: DA is 10% of basic salary
+        const tax = basic * 0.05; // Example: Tax is 5% of basic salary
+        const pf = basic * 0.12; // Example: PF is 12% of basic salary
+
+        const grossPay = basic + hra + da;
+        const deduction = tax + pf;
+        const netPay = grossPay - deduction;
+
+        document.getElementById("hra").value = hra.toFixed(2);
+        document.getElementById("da").value = da.toFixed(2);
+        document.getElementById("tax").value = tax.toFixed(2);
+        document.getElementById("pf").value = pf.toFixed(2);
+        document.getElementById("gross").value = grossPay.toFixed(2);
+        document.getElementById("deduction").value = deduction.toFixed(2);
+        document.getElementById("net").value = netPay.toFixed(2);
+      }
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="name">Employee Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="basic">Basic Salary:</label>
+      <input
+        type="number"
+        id="basic"
+        name="basic"
+        required
+        oninput="calculateSalary();"
+      /><br /><br />
+
+      <label for="hra">HRA:</label>
+      <input type="text" id="hra" name="hra" readonly /><br /><br />
+
+      <label for="da">DA:</label>
+      <input type="text" id="da" name="da" readonly /><br /><br />
+
+      <label for="tax">Tax:</label>
+      <input type="text" id="tax" name="tax" readonly /><br /><br />
+
+      <label for="pf">PF:</label>
+      <input type="text" id="pf" name="pf" readonly /><br /><br />
+
+      <label for="gross">Gross Pay:</label>
+      <input type="text" id="gross" name="gross" readonly /><br /><br />
+
+      <label for="deduction">Deduction:</label>
+      <input type="text" id="deduction" name="deduction" readonly /><br /><br />
+
+      <label for="net">Net Pay:</label>
+      <input type="text" id="net" name="net" readonly /><br /><br />
+    </form>
+  </body>
+</html>
