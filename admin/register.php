@@ -5,15 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <style>
-    .error {
-        color: red;
-    }
-    </style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-<body><?php session_start();
+<body>
+
+    <?php session_start();
 
 if (isset($_SESSION["username"])) {
     header("Location: index.php");
@@ -36,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = test_input($_POST["username"]);
 
     if (!preg_match('/^\w{5,}$/', $username)) {
-        $usernameErr = "Only letters, numbers, and underscores are allowed";   
+        $usernameErr = "Only letters, numbers, and underscores are allowed";
     }
 
     if (strlen($username) < 5) {
@@ -82,7 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-
 
 function test_input($data)
 {

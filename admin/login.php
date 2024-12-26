@@ -7,11 +7,7 @@
 
     <title>Log in</title>
 
-    <style>
-    .error {
-        color: red;
-    }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
