@@ -9,19 +9,17 @@
 
     <script>
       var urlParams = new URLSearchParams(window.location.search);
-      
+
       var username = urlParams.get("username");
       var password = urlParams.get("password");
-
+      var message = document.getElementById("message");
 
       if (localStorage.attempts >= 3) {
-        document.getElementById("message").innerHTML =
-          "You have exceeded the number of attempts";
+        message.innerHTML = "You have exceeded the number of attempts";
       } else if (username === "admin" && password === "admin") {
-        document.getElementById("message").innerHTML = "Welcome Admin";
+        message.innerHTML = "Welcome Admin";
       } else {
-        document.getElementById("message").innerHTML =
-          "Invalid username or password";
+        message.innerHTML = "Invalid username or password";
         localStorage.attempts = localStorage.attempts
           ? parseInt(localStorage.attempts) + 1
           : 1;
