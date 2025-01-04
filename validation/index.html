@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Validation</title>
+    <style>
+      span {
+        color: red;
+      }
+    </style>
+    <script>
+      function validate() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var usernameErr = document.getElementById("usernameErr");
+        var passwordErr = document.getElementById("passwordErr");
+        var isValid = true;
+
+        usernameErr.innerHTML = "";
+        passwordErr.innerHTML = "";
+
+        if (username === "") {
+          usernameErr.innerHTML = "Username is required";
+          isValid = false;
+        } else if (!isNaN(username)) {
+          usernameErr.innerHTML = "Username cannot be a number";
+          isValid = false;
+        } else if (username.length < 5 || username.length >= 20) {
+          usernameErr.innerHTML =
+            "Username must be between 5 and 20 characters";
+          isValid = false;
+        }
+
+        if (password === "") {
+          passwordErr.innerHTML = "Password is required";
+          isValid = false;
+        } else if (password.length < 5) {
+          passwordErr.innerHTML = "Password must be at least 5 characters";
+          isValid = false;
+        }
+
+        return isValid;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="./page.html" onsubmit="return validate();">
+      Username: <input type="text" name="username" id="username" />
+      <span>* </span> <span id="usernameErr"></span><br /><br />
+      Password:
+      <input type="password" name="password" id="password" />
+      <span>* </span> <span id="passwordErr"></span><br /><br />
+      <input type="submit" value="Log in" />
+    </form>
+  </body>
+</html>
