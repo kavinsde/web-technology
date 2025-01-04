@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive CSS Demo</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Internal CSS -->
+    <style>
+        .internal-style {
+            color: blue;
+            text-align: center;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="internal-style">Welcome to Comprehensive CSS Demo</h1>
+        <p class="external-style">This paragraph is styled with external CSS.</p>
+        <!-- Inline CSS -->
+        <p style="color: red;">This paragraph is styled with inline CSS.</p>
+        
+        <h2>CSS Selectors</h2>
+        <ul>
+            <li class="highlight">Class Selector</li>
+            <li id="unique">ID Selector</li>
+            <li>Element Selector</li>
+        </ul>
+        
+        <h2>Pseudo-classes and Pseudo-elements</h2>
+        <p>Hover over this <a href="#">link</a> to see the pseudo-class in action.</p>
+        <p>First line of this paragraph is styled using pseudo-element.</p>
+        
+        <h2>Box Model</h2>
+        <div class="box"></div>
+        <div class="box" style="background-color: green;"></div>
+        <div class="box" style="background-color: blue;"></div>
+        
+        <h2>Buttons</h2>
+        <button>Click Me</button>
+    </div>
+</body>
+</html>
