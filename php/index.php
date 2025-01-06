@@ -1,4 +1,3 @@
-<!-- form.html -->
 <!DOCTYPE html>
 <html>
 <body>
@@ -10,7 +9,7 @@
 
         <p>Country:
             <select name="country">
-                <option value="">Select</option>
+                <option value="not selected">Select</option>
                 <option value="usa">USA</option>
                 <option value="uk">UK</option>
                 <option value="india">India</option>
@@ -29,24 +28,30 @@
 
         <input type="submit" value="Submit">
     </form>
-</body>
-</html>
 
-<?php
+    <?php
+session_start();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "<h2>Form Submission Results:</h2>";
-    echo "Name: " . htmlspecialchars($_POST['name']) . "<br>";
-    echo "Bio: " . htmlspecialchars($_POST['bio']) . "<br>";
-    echo "Timestamp: " . htmlspecialchars($_POST['timestamp']) . "<br>";
-    echo "Password: " . htmlspecialchars($_POST['password']) . "<br>";
-    echo "Country: " . htmlspecialchars($_POST['country']) . "<br>";
-    echo "Gender: " . (isset($_POST['gender']) ? htmlspecialchars($_POST['gender']) : "Not selected") . "<br>";
+    $_SESSION['message'] = "<h2>Form Submission Results:</h2>";
+    $_SESSION['message'] .= "Name: " . htmlspecialchars($_POST['name']) . "<br>";
+    $_SESSION['message'] .= "Bio: " . htmlspecialchars($_POST['bio']) . "<br>";
+    $_SESSION['message'] .= "Timestamp: " . htmlspecialchars($_POST['timestamp']) . "<br>";
+    $_SESSION['message'] .= "Password: " . htmlspecialchars($_POST['password']) . "<br>";
+    $_SESSION['message'] .= "Country: " . htmlspecialchars($_POST['country']) . "<br>";
+    $_SESSION['message'] .= "Gender: " . (isset($_POST['gender']) ? htmlspecialchars($_POST['gender']) : "Not selected") . "<br>";
+    $_SESSION['message'] .= "Interests: ";
 
-    echo "Interests: ";
     if (isset($_POST['interests'])) {
-        echo implode(", ", array_map('htmlspecialchars', $_POST['interests']));
+        $_SESSION['message'] .= implode(", ", array_map('htmlspecialchars', $_POST['interests']));
     } else {
-        echo "None selected";
+        $_SESSION['message'] .= "None selected";
     }
+
+    header("Location: display.php");
+    exit();
 }
 ?>
+</body>
+</html>
