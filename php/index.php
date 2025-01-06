@@ -9,7 +9,7 @@
 
         <p>Country:
             <select name="country">
-                <option value="not selected">Select</option>
+                <option value="" selected disabled hidden>Choose here</option>
                 <option value="usa">USA</option>
                 <option value="uk">UK</option>
                 <option value="india">India</option>
@@ -31,7 +31,6 @@
 
     <?php
 session_start();
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['message'] = "<h2>Form Submission Results:</h2>";
