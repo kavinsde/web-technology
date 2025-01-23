@@ -27,7 +27,7 @@
     $result = '';
     $error = '';
     
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Get user input
         $num1 = filter_input(INPUT_POST, 'num1', FILTER_VALIDATE_FLOAT);
         $num2 = filter_input(INPUT_POST, 'num2', FILTER_VALIDATE_FLOAT);
