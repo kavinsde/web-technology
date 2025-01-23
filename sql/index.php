@@ -30,7 +30,7 @@
 
             if ($emailErr == "" && $messageErr == "") {
 
-                $stmt = $conn->prepare("INSERT INTO mails (email, message) VALUES (?, ?)");
+                $stmt = $connection->prepare("INSERT INTO mails (email, message) VALUES (?, ?)");
                 $stmt->bind_param("ss", $email, $message);
 
                 $stmt->execute();
