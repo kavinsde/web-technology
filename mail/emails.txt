@@ -1,0 +1,16 @@
+john.doe@example.com
+invalid.email@
+mary.smith@company.co.uk
+test123@subdomain.domain.com
+not_an_email
+jane@website-domain.org
+support+tickets@company.com
+incomplete@domain
+user.name@host.io
+@invalid.com
+test.email@my-company.net
+first.last@department.organization.edu
+no-at-sign.domain.com
+contact@website.design
+sales+department@business.co
+kavinsde@gmail.com dhina2@don.com
