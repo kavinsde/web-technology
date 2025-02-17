@@ -20,7 +20,7 @@ try {
     }
     
     // Regular expression pattern for email addresses
-    $pattern = '/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/';
+    $pattern = '/\S+@\S+\.\S+/';
     
     // Extract email addresses
     $emails = array();
