@@ -9,27 +9,14 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>View Users</title>
-    <style>
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid black; padding: 8px; }
-    </style>
 </head>
 <body>
     <h2>Users List</h2>
     <?php
     if ($result->num_rows > 0) {
-        echo "<table>
-                <tr>
-                    <th>Username</th>
-                    <th>Password</th>
-                </tr>";
         while($row = $result->fetch_assoc()) {
-            echo "<tr>
-                    <td>".$row["username"]."</td>
-                    <td>".$row["password"]."</td>
-                  </tr>";
+           echo $row['username'] . " " . $row['password'] . "<br>";
         }
-        echo "</table>";
     } else {
         echo "No users found";
     }
