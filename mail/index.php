@@ -1,18 +1,7 @@
 <?php
-// Database connection parameters
-$host = 'localhost';
-$dbname = 'nmc';
-$username = 'root';
-$password = '';
+include_once 'db.php';
 
 try {
-    // Create database connection (PHP 5 compatible mysql connection)
-    $mysqli = new mysqli($host, $username, $password, $dbname);
-    
-    if ($mysqli->connect_error) {
-        throw new Exception("Connection failed: " . $mysqli->connect_error);
-    }
-    
     // Read the file containing email addresses
     $file_content = file_get_contents('emails.txt');
     if ($file_content === FALSE) {
@@ -29,22 +18,15 @@ try {
     }
     
     // Prepare the insert statement
-    $stmt = $mysqli->prepare("INSERT INTO emails (email_address, date_added) VALUES (?, NOW())");
-    
-    if ($stmt === FALSE) {
-        throw new Exception("Error preparing statement: " . $mysqli->error);
-    }
+    $stmt = $conn->prepare("INSERT INTO emails (email_address, date_added) VALUES (?, NOW())");
     
     // Store emails in database
     foreach ($emails as $email) {
-        // Bind parameters (PHP 5 style)
         $stmt->bind_param('s', $email);
         
-        // Execute statement
         try {
             $stmt->execute();
         } catch (Exception $e) {
-            // Skip duplicates or handle other errors
             continue;
         }
     }
@@ -53,41 +35,19 @@ try {
     $stmt->close();
     
     // Retrieve all emails from database
-    $result = $mysqli->query("SELECT email_address, date_added FROM emails ORDER BY date_added DESC");
+    $result = $conn->query("SELECT email_address, date_added FROM emails ORDER BY date_added DESC");
     
-    if ($result === FALSE) {
-        throw new Exception("Error in select query: " . $mysqli->error);
-    }
-    
-    // Display results
-    echo "<html><head><title>Email List</title>";
-    echo "<style>
-            table { border-collapse: collapse; width: 100%; }
-            th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
-            th { background-color: #f2f2f2; }
-          </style>";
-    echo "</head><body>";
-    
-    echo "<h2>Extracted and Stored Emails</h2>";
-    echo "<table>";
-    echo "<tr><th>Email Address</th><th>Date Added</th></tr>";
-    
-    // PHP 5 compatible result fetching
+    echo "<h1>Stored and Extracted Emails</h1>";
+
+    echo "<ol>";
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['email_address'], ENT_QUOTES, 'UTF-8') . "</td>";
-        echo "<td>" . htmlspecialchars($row['date_added'], ENT_QUOTES, 'UTF-8') . "</td>";
-        echo "</tr>";
+        echo "<li>" .$row['email_address'] . " - " . $row['date_added'] . "</li>";
     }
-    
-    echo "</table>";
-    echo "</body></html>";
-    
-    // Free the result set
+    echo "</ol>";
+
     $result->free();
     
-    // Close the connection
-    $mysqli->close();
+    $conn->close();
     
 } catch (Exception $e) {
     die("Error: " . $e->getMessage());
