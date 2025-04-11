@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cascading Style Sheets</title>
+    <!-- External Style-->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Internal Style-->
+    <style>
+      ul > li {
+        list-style: square;
+      }
+      #role {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Inline style-->
+    <header>
+      <h1 style="text-align: center">Personal Portfolio</h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <p>Name : M. Kavin</p>
+        <p>Age : 23</p>
+        <p>Gender : Male</p>
+        <p>Role : <span id="role">Full Stack Developer</span></p>
+        <p>Company : Google</p>
+
+        <h2 class="heading">Technical Skills</h2>
+        <ul>
+          <li>Javascript</li>
+          <li>Python</li>
+          <li>Java</li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
